@@ -93,6 +93,131 @@
             position: relative;
             z-index: 2;
         }
+
+        /* Botón de idioma */
+        .lang-toggle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.6);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            background: none;
+        }
+        
+        .lang-toggle:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.9);
+        }
+        
+        .lang-toggle:active {
+            transform: scale(0.95) rotate(-2deg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+            transition: all 0.1s ease;
+        }
+        
+        .flag-half {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            top: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-toggle:hover .flag-half {
+            filter: brightness(1.1);
+        }
+        
+        /* Bandera de España SVG */
+        .flag-spain {
+            left: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="%23c60b1e"/><rect width="3" height="1" y="0.5" fill="%23ffc400"/></svg>') no-repeat;
+            background-size: cover;
+        }
+        
+        /* Bandera de USA SVG */
+        .flag-uk {
+            right: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1900 1000"><rect width="1900" height="1000" fill="%23b22234"/><rect width="1900" height="76.92" y="76.92" fill="white"/><rect width="1900" height="76.92" y="230.76" fill="white"/><rect width="1900" height="76.92" y="384.61" fill="white"/><rect width="1900" height="76.92" y="538.46" fill="white"/><rect width="1900" height="76.92" y="692.31" fill="white"/><rect width="1900" height="76.92" y="846.15" fill="white"/><rect width="760" height="538.46" fill="%233c3b6e"/><g fill="white"><circle cx="63" cy="63" r="6"/><circle cx="189" cy="63" r="6"/><circle cx="315" cy="63" r="6"/><circle cx="441" cy="63" r="6"/><circle cx="567" cy="63" r="6"/><circle cx="693" cy="63" r="6"/><circle cx="126" cy="126" r="6"/><circle cx="252" cy="126" r="6"/><circle cx="378" cy="126" r="6"/><circle cx="504" cy="126" r="6"/><circle cx="630" cy="126" r="6"/><circle cx="63" cy="189" r="6"/><circle cx="189" cy="189" r="6"/><circle cx="315" cy="189" r="6"/><circle cx="441" cy="189" r="6"/><circle cx="567" cy="189" r="6"/><circle cx="693" cy="189" r="6"/><circle cx="126" cy="252" r="6"/><circle cx="252" cy="252" r="6"/><circle cx="378" cy="252" r="6"/><circle cx="504" cy="252" r="6"/><circle cx="630" cy="252" r="6"/><circle cx="63" cy="315" r="6"/><circle cx="189" cy="315" r="6"/><circle cx="315" cy="315" r="6"/><circle cx="441" cy="315" r="6"/><circle cx="567" cy="315" r="6"/><circle cx="693" cy="315" r="6"/><circle cx="126" cy="378" r="6"/><circle cx="252" cy="378" r="6"/><circle cx="378" cy="378" r="6"/><circle cx="504" cy="378" r="6"/><circle cx="630" cy="378" r="6"/><circle cx="63" cy="441" r="6"/><circle cx="189" cy="441" r="6"/><circle cx="315" cy="441" r="6"/><circle cx="441" cy="441" r="6"/><circle cx="567" cy="441" r="6"/><circle cx="693" cy="441" r="6"/><circle cx="126" cy="504" r="6"/><circle cx="252" cy="504" r="6"/><circle cx="378" cy="504" r="6"/><circle cx="504" cy="504" r="6"/><circle cx="630" cy="504" r="6"/></g></svg>') no-repeat;
+            background-size: cover;
+        }
+        
+        /* Animación de rotación en hover */
+        @keyframes flagWave {
+            0% { transform: rotateY(0deg); }
+            50% { transform: rotateY(10deg); }
+            100% { transform: rotateY(0deg); }
+        }
+        
+        .lang-toggle:hover .flag-half {
+            animation: flagWave 0.6s ease-in-out;
+        }
+        
+        /* Animaciones de cambio de idioma */
+        .lang-changing {
+            animation: langFadeOut 0.3s ease-out forwards;
+        }
+        
+        .lang-changing.lang-fade-in {
+            animation: langFadeIn 0.3s ease-in forwards;
+        }
+        
+        @keyframes langFadeOut {
+            0% { opacity: 1; transform: translateY(0px); }
+            100% { opacity: 0; transform: translateY(-10px); }
+        }
+        
+        @keyframes langFadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0px); }
+        }
+        
+        /* Estados del botón según el idioma */
+        .lang-toggle.lang-en {
+            transform: rotateY(180deg);
+        }
+        
+        .lang-toggle.lang-es {
+            transform: rotateY(0deg);
+        }
+        
+        .lang-toggle {
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        /* Animación de volteo durante el cambio */
+        .lang-toggle.changing.lang-en {
+            animation: flipToEnglish 0.5s ease-in-out;
+        }
+        
+        .lang-toggle.changing.lang-es {
+            animation: flipToSpanish 0.5s ease-in-out;
+        }
+        
+        @keyframes flipToEnglish {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(180deg); }
+        }
+        
+        @keyframes flipToSpanish {
+            0% { transform: rotateY(180deg); }
+            100% { transform: rotateY(0deg); }
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .header-info {
+            flex: 1;
+        }
         
         .header {
             background: 
@@ -646,15 +771,23 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1 class="name">RAZVAN ANDREI BADE</h1>
-            <p class="title">Backend Software Engineer & Automation Specialist</p>
+            <div class="header-top">
+                <div class="header-info">
+                    <h1 class="name" data-es="Razvan Andrei Bade" data-en="Razvan Andrei Bade">RAZVAN ANDREI BADE</h1>
+                    <p class="title" data-es="Desarrollador Backend & Especialista en Automatización" data-en="Backend Software Engineer & Automation Specialist">Backend Software Engineer & Automation Specialist</p>
+                </div>
+                <button class="lang-toggle" id="lang-toggle" aria-label="Cambiar idioma">
+                    <div class="flag-half flag-spain"></div>
+                    <div class="flag-half flag-uk"></div>
+                </button>
+            </div>
             <div class="contact">
                 <div class="contact-item">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                         <polyline points="22,6 12,13 2,6"/>
                     </svg>
-                    <a href="mailto:baderazvan@gmail.com" style="color: white; text-decoration: none;">Correo</a>
+                    <a href="mailto:baderazvan@gmail.com" style="color: white; text-decoration: none;" data-es="Correo" data-en="Email">Correo</a>
                 </div>
                 <div class="contact-item">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -681,14 +814,14 @@
                         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                         <circle cx="12" cy="10" r="3"/>
                     </svg>
-                    Roquetas de Mar, España
+                    <span data-es="Roquetas de Mar, España" data-en="Roquetas de Mar, Spain">Roquetas de Mar, España</span>
                 </div>
             </div>
         </div>
 
         <div class="content">
             <div class="highlight-box">
-                <div class="highlight-title">
+                <div class="highlight-title" data-es="Logros Destacados & Automatización" data-en="Outstanding Achievements & Automation">
                     <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-right: 8px; vertical-align: middle;">
                         <circle cx="12" cy="8" r="7"/>
                         <polyline points="8.21,13.89 7,23 12,20 17,23 15.79,13.88"/>
@@ -697,30 +830,30 @@
                 </div>
                 <div class="achievements">
                     <div class="achievement">
-                        <strong>Mejora de Performance</strong><br>
-                        Optimicé APIs REST con Spring Boot mejorando el rendimiento en un 30%
+                        <strong data-es="Mejora de Performance" data-en="Performance Improvement">Mejora de Performance</strong><br>
+                        <span data-es="Optimicé APIs REST con Spring Boot mejorando el rendimiento en un 30%" data-en="Optimized REST APIs with Spring Boot improving performance by 30%">Optimicé APIs REST con Spring Boot mejorando el rendimiento en un 30%</span>
                     </div>
                     <div class="achievement">
-                        <strong>Reducción de Incidentes</strong><br>
-                        Implementé monitoreo ELK Stack y Grafana, reduciendo incidentes en 40%
+                        <strong data-es="Reducción de Incidentes" data-en="Incident Reduction">Reducción de Incidentes</strong><br>
+                        <span data-es="Implementé monitoreo ELK Stack y Grafana, reduciendo incidentes en 40%" data-en="Implemented ELK Stack and Grafana monitoring, reducing incidents by 40%">Implementé monitoreo ELK Stack y Grafana, reduciendo incidentes en 40%</span>
                     </div>
                     <div class="achievement">
-                        <strong>Automatización de Costos</strong><br>
-                        Automaticé workflows con Make y Parabola, reduciendo costos operativos en 20%
+                        <strong data-es="Automatización de Costos" data-en="Cost Automation">Automatización de Costos</strong><br>
+                        <span data-es="Automaticé workflows con Make y Parabola, reduciendo costos operativos en 20%" data-en="Automated workflows with Make and Parabola, reducing operational costs by 20%">Automaticé workflows con Make y Parabola, reduciendo costos operativos en 20%</span>
                     </div>
                     <div class="achievement">
-                        <strong>Proyectos Vodafone</strong><br>
-                        Desarrollé 3 proyectos completos de datos masivos para Vodafone via NTT Data
+                        <strong data-es="Proyectos Vodafone" data-en="Vodafone Projects">Proyectos Vodafone</strong><br>
+                        <span data-es="Desarrollé 3 proyectos completos de datos masivos para Vodafone via NTT Data" data-en="Developed 3 complete big data projects for Vodafone via NTT Data">Desarrollé 3 proyectos completos de datos masivos para Vodafone via NTT Data</span>
                     </div>
                     <div class="achievement">
-                        <strong>Visión Data Analytics</strong><br>
-                        Expandiendo hacia Data Analytics con certificaciones de Google, IBM, Meta y Microsoft
+                        <strong data-es="Visión Data Analytics" data-en="Data Analytics Vision">Visión Data Analytics</strong><br>
+                        <span data-es="Expandiendo hacia Data Analytics con certificaciones de Google, IBM, Meta y Microsoft" data-en="Expanding towards Data Analytics with certifications from Google, IBM, Meta and Microsoft">Expandiendo hacia Data Analytics con certificaciones de Google, IBM, Meta y Microsoft</span>
                     </div>
                 </div>
             </div>
 
             <section class="section">
-                <h2 class="section-title">
+                <h2 class="section-title" data-es="Experiencia Profesional" data-en="Professional Experience">
                     <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
                         <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
@@ -731,17 +864,17 @@
                 <div class="job">
                     <div class="job-header">
                         <div>
-                            <div class="job-title">Freelancer Consultant & Automation Specialist</div>
-                            <div class="company">Roquetas de Mar, España</div>
+                            <div class="job-title" data-es="Freelancer Consultant & Automation Specialist" data-en="Freelancer Consultant & Automation Specialist">Freelancer Consultant & Automation Specialist</div>
+                            <div class="company" data-es="Roquetas de Mar, España" data-en="Roquetas de Mar, Spain">Roquetas de Mar, España</div>
                         </div>
-                        <div class="date">Abr 2024 - Presente</div>
+                        <div class="date" data-es="Abr 2024 - Presente" data-en="Apr 2024 - Present">Abr 2024 - Presente</div>
                     </div>
                     <div class="job-description">
                         <ul>
-                            <li><strong>Desarrollo No-Code:</strong> Creé 3 aplicaciones web completas con Bubble.io y Webflow</li>
-                            <li><strong>Automatización Avanzada:</strong> Implementé workflows automatizados con Make, N8N y Parabola</li>
-                            <li><strong>Optimización de Procesos:</strong> Automaticé flujos de bases de datos y procesos empresariales</li>
-                            <li><strong>Testing & QA:</strong> Utilizo Postman para testing de APIs y validación de integraciones</li>
+                            <li data-es="Desarrollo No-Code: Creé 3 aplicaciones web completas con Bubble.io y Webflow" data-en="No-Code Development: Created 3 complete web applications with Bubble.io and Webflow"><strong data-es="Desarrollo No-Code:" data-en="No-Code Development:">Desarrollo No-Code:</strong> <span data-es="Creé 3 aplicaciones web completas con Bubble.io y Webflow" data-en="Created 3 complete web applications with Bubble.io and Webflow">Creé 3 aplicaciones web completas con Bubble.io y Webflow</span></li>
+                            <li data-es="Automatización Avanzada: Implementé workflows automatizados con Make, N8N y Parabola" data-en="Advanced Automation: Implemented automated workflows with Make, N8N and Parabola"><strong data-es="Automatización Avanzada:" data-en="Advanced Automation:">Automatización Avanzada:</strong> <span data-es="Implementé workflows automatizados con Make, N8N y Parabola" data-en="Implemented automated workflows with Make, N8N and Parabola">Implementé workflows automatizados con Make, N8N y Parabola</span></li>
+                            <li data-es="Optimización de Procesos: Automaticé flujos de bases de datos y procesos empresariales" data-en="Process Optimization: Automated database flows and business processes"><strong data-es="Optimización de Procesos:" data-en="Process Optimization:">Optimización de Procesos:</strong> <span data-es="Automaticé flujos de bases de datos y procesos empresariales" data-en="Automated database flows and business processes">Automaticé flujos de bases de datos y procesos empresariales</span></li>
+                            <li data-es="Testing & QA: Utilizo Postman para testing de APIs y validación de integraciones" data-en="Testing & QA: Using Postman for API testing and integration validation"><strong data-es="Testing & QA:" data-en="Testing & QA:">Testing & QA:</strong> <span data-es="Utilizo Postman para testing de APIs y validación de integraciones" data-en="Using Postman for API testing and integration validation">Utilizo Postman para testing de APIs y validación de integraciones</span></li>
                         </ul>
                     </div>
                 </div>
@@ -749,40 +882,40 @@
                 <div class="job">
                     <div class="job-header">
                         <div>
-                            <div class="job-title">Backend Developer (Proyectos Vodafone)</div>
-                            <div class="company">NTT Data | Murcia, España</div>
+                            <div class="job-title" data-es="Backend Developer (Proyectos Vodafone)" data-en="Backend Developer (Vodafone Projects)">Backend Developer (Proyectos Vodafone)</div>
+                            <div class="company" data-es="NTT Data | Murcia, España" data-en="NTT Data | Murcia, Spain">NTT Data | Murcia, España</div>
                         </div>
-                        <div class="date">Dic 2022 - Jun 2023</div>
+                        <div class="date" data-es="Dic 2022 - Jun 2023" data-en="Dec 2022 - Jun 2023">Dic 2022 - Jun 2023</div>
                     </div>
                     <div class="job-description">
-                        <p><strong>Desarrollé 3 proyectos estratégicos para Vodafone:</strong></p>
+                        <p data-es="Desarrollé 3 proyectos estratégicos para Vodafone:" data-en="Developed 3 strategic projects for Vodafone:"><strong data-es="Desarrollé 3 proyectos estratégicos para Vodafone:" data-en="Developed 3 strategic projects for Vodafone:">Desarrollé 3 proyectos estratégicos para Vodafone:</strong></p>
                         
                         <div class="project">
-                            <div class="project-name">🔹 Proyecto NTOL</div>
-                            Implementación de manejo de datos masivos con ELK Stack, usando 3 pipelines para enriquecer datos JSON y visualización en Kibana
+                            <div class="project-name" data-es="🔹 Proyecto NTOL" data-en="🔹 NTOL Project">🔹 Proyecto NTOL</div>
+                            <span data-es="Implementación de manejo de datos masivos con ELK Stack, usando 3 pipelines para enriquecer datos JSON y visualización en Kibana" data-en="Implementation of big data handling with ELK Stack, using 3 pipelines to enrich JSON data and visualization in Kibana">Implementación de manejo de datos masivos con ELK Stack, usando 3 pipelines para enriquecer datos JSON y visualización en Kibana</span>
                         </div>
                         
                         <div class="project">
-                            <div class="project-name">🔹 Proyecto MigracionOn15_On19</div>
-                            Migración completa con pipelines de entorno de prueba a preproducción, utilizando Beats y Filebeat
+                            <div class="project-name" data-es="🔹 Proyecto MigracionOn15_On19" data-en="🔹 MigracionOn15_On19 Project">🔹 Proyecto MigracionOn15_On19</div>
+                            <span data-es="Migración completa con pipelines de entorno de prueba a preproducción, utilizando Beats y Filebeat" data-en="Complete migration with pipelines from test environment to pre-production, using Beats and Filebeat">Migración completa con pipelines de entorno de prueba a preproducción, utilizando Beats y Filebeat</span>
                         </div>
                         
                         <div class="project">
-                            <div class="project-name">🔹 Proyecto Batch_Validate</div>
-                            Ingesta doble de datos Kafka con transformación a JSON. Desarrollé script Python como semáforo de control
+                            <div class="project-name" data-es="🔹 Proyecto Batch_Validate" data-en="🔹 Batch_Validate Project">🔹 Proyecto Batch_Validate</div>
+                            <span data-es="Ingesta doble de datos Kafka con transformación a JSON. Desarrollé script Python como semáforo de control" data-en="Double Kafka data ingestion with JSON transformation. Developed Python script as control semaphore">Ingesta doble de datos Kafka con transformación a JSON. Desarrollé script Python como semáforo de control</span>
                         </div>
                         
                         <ul>
-                            <li>Integré Kafka para messaging en arquitecturas de microservicios</li>
-                            <li>Deploymé soluciones en Docker y Kubernetes con CI/CD pipelines</li>
-                            <li>Desarrollé APIs REST con Spring Boot y Python</li>
+                            <li data-es="Integré Kafka para messaging en arquitecturas de microservicios" data-en="Integrated Kafka for messaging in microservices architectures">Integré Kafka para messaging en arquitecturas de microservicios</li>
+                            <li data-es="Deploymé soluciones en Docker y Kubernetes con CI/CD pipelines" data-en="Deployed solutions in Docker and Kubernetes with CI/CD pipelines">Deploymé soluciones en Docker y Kubernetes con CI/CD pipelines</li>
+                            <li data-es="Desarrollé APIs REST con Spring Boot y Python" data-en="Developed REST APIs with Spring Boot and Python">Desarrollé APIs REST con Spring Boot y Python</li>
                         </ul>
                     </div>
                 </div>
             </section>
 
             <section class="section">
-                <h2 class="section-title">
+                <h2 class="section-title" data-es="Habilidades Técnicas" data-en="Technical Skills">
                     <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 19l7-7 3 3-7 7-3-3z"/>
                         <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
@@ -794,7 +927,7 @@
                 
                 <div class="skills-grid">
                     <div class="skill-category">
-                        <div class="skill-category-title">Backend & APIs</div>
+                        <div class="skill-category-title" data-es="Backend & APIs" data-en="Backend & APIs">Backend & APIs</div>
                         <div class="skill-tags">
                             <span class="skill-tag">Java</span>
                             <span class="skill-tag">Spring Boot</span>
@@ -805,18 +938,18 @@
                     </div>
                     
                     <div class="skill-category">
-                        <div class="skill-category-title">Automatización</div>
+                        <div class="skill-category-title" data-es="Automatización" data-en="Automation">Automatización</div>
                         <div class="skill-tags">
                             <span class="skill-tag">Make</span>
                             <span class="skill-tag">N8N</span>
                             <span class="skill-tag">Parabola</span>
                             <span class="skill-tag">Postman</span>
-                            <span class="skill-tag">Workflow Automation</span>
+                            <span class="skill-tag" data-es="Workflow Automation" data-en="Workflow Automation">Workflow Automation</span>
                         </div>
                     </div>
                     
                     <div class="skill-category">
-                        <div class="skill-category-title">DevOps & Cloud</div>
+                        <div class="skill-category-title" data-es="DevOps & Cloud" data-en="DevOps & Cloud">DevOps & Cloud</div>
                         <div class="skill-tags">
                             <span class="skill-tag">Docker</span>
                             <span class="skill-tag">Kubernetes</span>
@@ -827,7 +960,7 @@
                     </div>
                     
                     <div class="skill-category">
-                        <div class="skill-category-title">Bases de Datos</div>
+                        <div class="skill-category-title" data-es="Bases de Datos" data-en="Databases">Bases de Datos</div>
                         <div class="skill-tags">
                             <span class="skill-tag">MongoDB</span>
                             <span class="skill-tag">PostgreSQL</span>
@@ -837,7 +970,7 @@
                     </div>
                     
                     <div class="skill-category">
-                        <div class="skill-category-title">Messaging & Monitoring</div>
+                        <div class="skill-category-title" data-es="Messaging & Monitoring" data-en="Messaging & Monitoring">Messaging & Monitoring</div>
                         <div class="skill-tags">
                             <span class="skill-tag">Kafka</span>
                             <span class="skill-tag">Grafana</span>
@@ -847,18 +980,18 @@
                     </div>
                     
                     <div class="skill-category">
-                        <div class="skill-category-title">Data Analytics (En desarrollo)</div>
+                        <div class="skill-category-title" data-es="Data Analytics (En desarrollo)" data-en="Data Analytics (In development)">Data Analytics (En desarrollo)</div>
                         <div class="skill-tags">
                             <span class="skill-tag">Tableau</span>
                             <span class="skill-tag">Power BI</span>
-                            <span class="skill-tag">R Programming</span>
-                            <span class="skill-tag">Python Analytics</span>
-                            <span class="skill-tag">Statistical Analysis</span>
+                            <span class="skill-tag" data-es="R Programming" data-en="R Programming">R Programming</span>
+                            <span class="skill-tag" data-es="Python Analytics" data-en="Python Analytics">Python Analytics</span>
+                            <span class="skill-tag" data-es="Statistical Analysis" data-en="Statistical Analysis">Statistical Analysis</span>
                         </div>
                     </div>
                     
                     <div class="skill-category">
-                        <div class="skill-category-title">No-Code & Testing</div>
+                        <div class="skill-category-title" data-es="No-Code & Testing" data-en="No-Code & Testing">No-Code & Testing</div>
                         <div class="skill-tags">
                             <span class="skill-tag">Bubble.io</span>
                             <span class="skill-tag">Webflow</span>
@@ -870,7 +1003,7 @@
             </section>
 
             <section class="section">
-                <h2 class="section-title">
+                <h2 class="section-title" data-es="Educación" data-en="Education">
                     <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/>
                         <path d="M22 10v6"/>
@@ -880,22 +1013,22 @@
                 </h2>
                 
                 <div class="education-item">
-                    <div class="degree">Desarrollo de Aplicaciones Web (En curso)</div>
-                    <div class="university">iFP - Innovación en Formación Profesional, Madrid</div>
-                    <div class="date">2024 - Presente</div>
-                    <p>Angular, JavaScript, SQL, Desarrollo Web Avanzado</p>
+                    <div class="degree" data-es="Desarrollo de Aplicaciones Web (En curso)" data-en="Web Application Development (In progress)">Desarrollo de Aplicaciones Web (En curso)</div>
+                    <div class="university" data-es="iFP - Innovación en Formación Profesional, Madrid" data-en="iFP - Innovation in Professional Training, Madrid">iFP - Innovación en Formación Profesional, Madrid</div>
+                    <div class="date" data-es="2024 - Presente" data-en="2024 - Present">2024 - Presente</div>
+                    <p data-es="Angular, JavaScript, SQL, Desarrollo Web Avanzado" data-en="Angular, JavaScript, SQL, Advanced Web Development">Angular, JavaScript, SQL, Desarrollo Web Avanzado</p>
                 </div>
                 
                 <div class="education-item">
-                    <div class="degree">Ingeniería Informática Aplicada a Objetos</div>
-                    <div class="university">Universidad de Almería, España</div>
+                    <div class="degree" data-es="Ingeniería Informática Aplicada a Objetos" data-en="Computer Engineering Applied to Objects">Ingeniería Informática Aplicada a Objetos</div>
+                    <div class="university" data-es="Universidad de Almería, España" data-en="University of Almería, Spain">Universidad de Almería, España</div>
                     <div class="date">2015 - 2020</div>
-                    <p>Java Backend, Spring Boot, APIs REST, Eclipse</p>
+                    <p data-es="Java Backend, Spring Boot, APIs REST, Eclipse" data-en="Java Backend, Spring Boot, REST APIs, Eclipse">Java Backend, Spring Boot, APIs REST, Eclipse</p>
                 </div>
             </section>
 
             <section class="section">
-                <h2 class="section-title">
+                <h2 class="section-title" data-es="Certificaciones & Reconocimientos" data-en="Certifications & Recognitions">
                     <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polygon points="12,2 15.09,8.26 22,9 17,14 18.18,21 12,17.77 5.82,21 7,14 2,9 8.91,8.26 12,2"/>
                     </svg>
@@ -904,17 +1037,17 @@
                 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
                     <div class="education-item">
-                        <strong>Certificaciones Completadas:</strong>
+                        <strong data-es="Certificaciones Completadas:" data-en="Completed Certifications:">Certificaciones Completadas:</strong>
                         <ul>
-                            <li>Spring Certified Professional Academy (En proceso)</li>
+                            <li data-es="Spring Certified Professional Academy (En proceso)" data-en="Spring Certified Professional Academy (In progress)">Spring Certified Professional Academy (En proceso)</li>
                             <li>SQL Certificate - Udemy 2024</li>
                             <li>ELK Certificate - Udemy 2024</li>
                             <li>Java Certificate - Udemy 2024</li>
                         </ul>
                         
-                        <strong style="margin-top: 15px; display: block;">Certificaciones Objetivo 2025-2026:</strong>
+                        <strong style="margin-top: 15px; display: block;" data-es="Certificaciones Objetivo 2025-2026:" data-en="Target Certifications 2025-2026:">Certificaciones Objetivo 2025-2026:</strong>
                         <div style="margin-top: 10px; padding: 15px; background: #e3f2fd; border-radius: 8px; border-left: 3px solid #2196f3;">
-                            <div style="font-weight: 600; color: #1976d2; margin-bottom: 10px;">🎯 Expansión hacia Data Analytics</div>
+                            <div style="font-weight: 600; color: #1976d2; margin-bottom: 10px;" data-es="🎯 Expansión hacia Data Analytics" data-en="🎯 Expansion towards Data Analytics">🎯 Expansión hacia Data Analytics</div>
                             <ul style="margin: 0;">
                                 <li><strong>Google Data Analytics Professional Certificate</strong> - Coursera</li>
                                 <li><strong>IBM Data Analyst Professional Certificate</strong> - Coursera</li>
@@ -926,11 +1059,11 @@
                     </div>
                     
                     <div class="education-item">
-                        <strong>Premios:</strong>
+                        <strong data-es="Premios:" data-en="Awards:">Premios:</strong>
                         <ul>
-                            <li>UAL Award - Mejor Iniciativa Empresarial (Cajamar)</li>
-                            <li>Premio Colegio de Economistas de Almería</li>
-                            <li>Premio Naturgy - Iniciativa Industrial Innovadora 2022</li>
+                            <li data-es="UAL Award - Mejor Iniciativa Empresarial (Cajamar)" data-en="UAL Award - Best Business Initiative (Cajamar)">UAL Award - Mejor Iniciativa Empresarial (Cajamar)</li>
+                            <li data-es="Premio Colegio de Economistas de Almería" data-en="Almería Economists College Award">Premio Colegio de Economistas de Almería</li>
+                            <li data-es="Premio Naturgy - Iniciativa Industrial Innovadora 2022" data-en="Naturgy Award - Innovative Industrial Initiative 2022">Premio Naturgy - Iniciativa Industrial Innovadora 2022</li>
                         </ul>
                     </div>
                 </div>
@@ -938,7 +1071,7 @@
             
             <!-- Navegación al portfolio en el footer -->
             <div class="footer-nav">
-                <a href="../portfolio/portfolio.html" class="footer-portfolio-btn">
+                <a href="../portfolio/portfolio.html" class="footer-portfolio-btn" data-es="Ver mi Portfolio Completo" data-en="View my Complete Portfolio">
                     <span>📄</span>
                     Ver mi Portfolio Completo
                 </a>
@@ -971,6 +1104,69 @@
                 scrollTopBtn.style.opacity = '0.6';
             }
         });
+        
+        // Script para cambiar el idioma con animación
+        function setLang(lang) {
+            localStorage.setItem('lang', lang);
+            document.documentElement.lang = lang;
+            
+            // Animar todos los elementos con traducción
+            const elements = document.querySelectorAll('[data-es], [data-en]');
+            elements.forEach(el => {
+                el.textContent = el.getAttribute('data-' + lang);
+            });
+            
+            // Actualizar estado visual del botón
+            updateButtonState(lang);
+        }
+        
+        function updateButtonState(lang) {
+            const button = document.getElementById('lang-toggle');
+            button.classList.remove('lang-es', 'lang-en');
+            button.classList.add('lang-' + lang);
+        }
+        
+        function toggleLang() {
+            const current = localStorage.getItem('lang') || 'es';
+            const newLang = current === 'es' ? 'en' : 'es';
+            const button = document.getElementById('lang-toggle');
+            const elements = document.querySelectorAll('[data-es], [data-en]');
+            
+            // Actualizar estado del botón y iniciar animación de volteo
+            updateButtonState(newLang);
+            button.classList.add('changing');
+            
+            // Fase 1: Fade out todos los textos
+            elements.forEach(el => {
+                el.classList.add('lang-changing');
+            });
+            
+            // Fase 2: Cambiar textos y fade in después de 250ms (mitad del volteo)
+            setTimeout(() => {
+                elements.forEach(el => {
+                    el.textContent = el.getAttribute('data-' + newLang);
+                    el.classList.remove('lang-changing');
+                    el.classList.add('lang-changing', 'lang-fade-in');
+                });
+                
+                localStorage.setItem('lang', newLang);
+                document.documentElement.lang = newLang;
+            }, 250);
+            
+            // Fase 3: Limpiar clases después de la animación
+            setTimeout(() => {
+                elements.forEach(el => {
+                    el.classList.remove('lang-changing', 'lang-fade-in');
+                });
+                button.classList.remove('changing');
+            }, 500);
+        }
+        
+        document.getElementById('lang-toggle').onclick = toggleLang;
+        
+        // Inicializar idioma
+        const initialLang = localStorage.getItem('lang') || 'es';
+        setLang(initialLang);
     </script>
 </body>
 </html>

@@ -101,6 +101,121 @@
             color: white;
             transform: translateY(-2px);
         }
+
+        /* Botón de idioma */
+        .lang-toggle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.8);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            margin-left: 1rem;
+            background: none;
+        }
+        
+        .lang-toggle:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            border-color: rgba(255,255,255,1);
+        }
+        
+        .lang-toggle:active {
+            transform: scale(0.95) rotate(-2deg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            transition: all 0.1s ease;
+        }
+        
+        .flag-half {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            top: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-toggle:hover .flag-half {
+            filter: brightness(1.1);
+        }
+        
+        /* Bandera de España SVG */
+        .flag-spain {
+            left: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="%23c60b1e"/><rect width="3" height="1" y="0.5" fill="%23ffc400"/></svg>') no-repeat;
+            background-size: cover;
+        }
+        
+        /* Bandera de USA SVG */
+        .flag-uk {
+            right: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1900 1000"><rect width="1900" height="1000" fill="%23b22234"/><rect width="1900" height="76.92" y="76.92" fill="white"/><rect width="1900" height="76.92" y="230.76" fill="white"/><rect width="1900" height="76.92" y="384.61" fill="white"/><rect width="1900" height="76.92" y="538.46" fill="white"/><rect width="1900" height="76.92" y="692.31" fill="white"/><rect width="1900" height="76.92" y="846.15" fill="white"/><rect width="760" height="538.46" fill="%233c3b6e"/><g fill="white"><circle cx="63" cy="63" r="6"/><circle cx="189" cy="63" r="6"/><circle cx="315" cy="63" r="6"/><circle cx="441" cy="63" r="6"/><circle cx="567" cy="63" r="6"/><circle cx="693" cy="63" r="6"/><circle cx="126" cy="126" r="6"/><circle cx="252" cy="126" r="6"/><circle cx="378" cy="126" r="6"/><circle cx="504" cy="126" r="6"/><circle cx="630" cy="126" r="6"/><circle cx="63" cy="189" r="6"/><circle cx="189" cy="189" r="6"/><circle cx="315" cy="189" r="6"/><circle cx="441" cy="189" r="6"/><circle cx="567" cy="189" r="6"/><circle cx="693" cy="189" r="6"/><circle cx="126" cy="252" r="6"/><circle cx="252" cy="252" r="6"/><circle cx="378" cy="252" r="6"/><circle cx="504" cy="252" r="6"/><circle cx="630" cy="252" r="6"/><circle cx="63" cy="315" r="6"/><circle cx="189" cy="315" r="6"/><circle cx="315" cy="315" r="6"/><circle cx="441" cy="315" r="6"/><circle cx="567" cy="315" r="6"/><circle cx="693" cy="315" r="6"/><circle cx="126" cy="378" r="6"/><circle cx="252" cy="378" r="6"/><circle cx="378" cy="378" r="6"/><circle cx="504" cy="378" r="6"/><circle cx="630" cy="378" r="6"/><circle cx="63" cy="441" r="6"/><circle cx="189" cy="441" r="6"/><circle cx="315" cy="441" r="6"/><circle cx="441" cy="441" r="6"/><circle cx="567" cy="441" r="6"/><circle cx="693" cy="441" r="6"/><circle cx="126" cy="504" r="6"/><circle cx="252" cy="504" r="6"/><circle cx="378" cy="504" r="6"/><circle cx="504" cy="504" r="6"/><circle cx="630" cy="504" r="6"/></g></svg>') no-repeat;
+            background-size: cover;
+        }
+        
+        /* Animación de rotación en hover */
+        @keyframes flagWave {
+            0% { transform: rotateY(0deg); }
+            50% { transform: rotateY(10deg); }
+            100% { transform: rotateY(0deg); }
+        }
+        
+        .lang-toggle:hover .flag-half {
+            animation: flagWave 0.6s ease-in-out;
+        }
+        
+        /* Animaciones de cambio de idioma */
+        .lang-changing {
+            animation: langFadeOut 0.3s ease-out forwards;
+        }
+        
+        .lang-changing.lang-fade-in {
+            animation: langFadeIn 0.3s ease-in forwards;
+        }
+        
+        @keyframes langFadeOut {
+            0% { opacity: 1; transform: translateY(0px); }
+            100% { opacity: 0; transform: translateY(-10px); }
+        }
+        
+        @keyframes langFadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0px); }
+        }
+        
+        /* Estados del botón según el idioma */
+        .lang-toggle.lang-en {
+            transform: rotateY(180deg);
+        }
+        
+        .lang-toggle.lang-es {
+            transform: rotateY(0deg);
+        }
+        
+        .lang-toggle {
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        /* Animación de volteo durante el cambio */
+        .lang-toggle.changing.lang-en {
+            animation: flipToEnglish 0.5s ease-in-out;
+        }
+        
+        .lang-toggle.changing.lang-es {
+            animation: flipToSpanish 0.5s ease-in-out;
+        }
+        
+        @keyframes flipToEnglish {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(180deg); }
+        }
+        
+        @keyframes flipToSpanish {
+            0% { transform: rotateY(180deg); }
+            100% { transform: rotateY(0deg); }
+        }
         
         .hero {
             min-height: 100vh;
@@ -458,28 +573,32 @@
         <div class="nav-container">
             <a href="#" class="logo">RAB</a>
             <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#habilidades">Habilidades</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#inicio" data-es="Inicio" data-en="Home">Inicio</a></li>
+                <li><a href="#portfolio" data-es="Portfolio" data-en="Portfolio">Portfolio</a></li>
+                <li><a href="#habilidades" data-es="Habilidades" data-en="Skills">Habilidades</a></li>
+                <li><a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a></li>
             </ul>
+            <button class="lang-toggle" id="lang-toggle" aria-label="Cambiar idioma">
+                <div class="flag-half flag-spain"></div>
+                <div class="flag-half flag-uk"></div>
+            </button>
         </div>
     </nav>
 
     <section id="inicio" class="hero">
         <div class="hero-content">
-            <h1 class="hero-title">Razvan Andrei Bade</h1>
-            <h2 class="hero-subtitle">Desarrollador & Creador Digital</h2>
-            <p class="hero-description">
+            <h1 class="hero-title" data-es="Razvan Andrei Bade" data-en="Razvan Andrei Bade">Razvan Andrei Bade</h1>
+            <h2 class="hero-subtitle" data-es="Desarrollador & Creador Digital" data-en="Developer & Digital Creator">Desarrollador & Creador Digital</h2>
+            <p class="hero-description" data-es="Bienvenido a mi portafolio digital. Especializado en desarrollo web, inteligencia artificial y análisis de datos, con experiencia en proyectos corporativos y soluciones innovadoras para empresas y startups." data-en="Welcome to my digital portfolio. Specialized in web development, artificial intelligence, and data analysis, with experience in corporate projects and innovative solutions for companies and startups.">
                 Bienvenido a mi portafolio digital. Especializado en desarrollo web, inteligencia artificial y análisis de datos,
                 con experiencia en proyectos corporativos y soluciones innovadoras para empresas y startups.
             </p>
             <div class="cta-buttons">
-                <a href="../cv/cv.html" class="btn btn-primary">
+                <a href="../cv/cv.html" class="btn btn-primary" data-es="Ver mi CV" data-en="View my CV">
                     <i class="fas fa-file-alt"></i>
                     Ver mi CV
                 </a>
-                <a href="#portfolio" class="btn btn-secondary">
+                <a href="#portfolio" class="btn btn-secondary" data-es="Ver Proyectos" data-en="View Projects">
                     <i class="fas fa-rocket"></i>
                     Ver Proyectos
                 </a>
@@ -489,8 +608,8 @@
 
     <div class="sections-container">
         <section id="portfolio" class="section">
-            <h2 class="section-title animate-on-scroll">Mi Portfolio</h2>
-            <p class="section-subtitle animate-on-scroll">
+            <h2 class="section-title animate-on-scroll" data-es="Mi Portfolio" data-en="My Portfolio">Mi Portfolio</h2>
+            <p class="section-subtitle animate-on-scroll" data-es="Proyectos reales que incluyen desarrollo web, bots con IA, sistemas de monitoreo y soluciones corporativas" data-en="Real projects including web development, AI bots, monitoring systems and corporate solutions">
                 Proyectos reales que incluyen desarrollo web, bots con IA, sistemas de monitoreo y soluciones corporativas
             </p>
             
@@ -499,11 +618,11 @@
                     <div class="card-icon">
                         <i class="fas fa-user-tie"></i>
                     </div>
-                    <h3 class="card-title">CV Profesional</h3>
-                    <p class="card-description">
+                    <h3 class="card-title" data-es="CV Profesional" data-en="Professional CV">CV Profesional</h3>
+                    <p class="card-description" data-es="Mi currículum vitae completo con experiencia profesional, educación, habilidades técnicas y logros destacados." data-en="My complete curriculum vitae with professional experience, education, technical skills and outstanding achievements.">
                         Mi currículum vitae completo con experiencia profesional, educación, habilidades técnicas y logros destacados.
                     </p>
-                    <a href="../cv/cv.html" class="card-link">
+                    <a href="../cv/cv.html" class="card-link" data-es="Ver CV" data-en="View CV">
                         Ver CV <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -513,10 +632,10 @@
                         <i class="fas fa-tooth"></i>  
                     </div>
                     <h3 class="card-title">Wisechoice.dental</h3>
-                    <p class="card-description">
+                    <p class="card-description" data-es="Blog especializado en odontología con contenido educativo, diseño responsive y gestión de contenido optimizada para SEO." data-en="Specialized dentistry blog with educational content, responsive design and SEO-optimized content management.">
                         Blog especializado en odontología con contenido educativo, diseño responsive y gestión de contenido optimizada para SEO.
                     </p>
-                    <a href="wisechoice-dental/index.html" class="card-link">
+                    <a href="wisechoice-dental/index.html" class="card-link" data-es="Ver Proyecto" data-en="View Project">
                         Ver Proyecto <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -526,10 +645,10 @@
                         <i class="fas fa-cogs"></i>
                     </div>
                     <h3 class="card-title">Autoforge</h3>
-                    <p class="card-description">
+                    <p class="card-description" data-es="Agencia de automatización de proyectos empresariales donde actúo como Socio Fundador & CTO. Especializada en transformar procesos manuales en sistemas automatizados eficientes." data-en="Business project automation agency where I act as Founding Partner & CTO. Specialized in transforming manual processes into efficient automated systems.">
                         Agencia de automatización de proyectos empresariales donde actúo como Socio Fundador & CTO. Especializada en transformar procesos manuales en sistemas automatizados eficientes.
                     </p>
-                    <a href="autoforge/index.html" class="card-link">
+                    <a href="autoforge/index.html" class="card-link" data-es="Ver Empresa" data-en="View Company">
                         Ver Empresa <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -539,10 +658,10 @@
                         <i class="fas fa-chart-line"></i>
                     </div>
                     <h3 class="card-title">TSTelling</h3>
-                    <p class="card-description">
+                    <p class="card-description" data-es="Plataforma web con interfaces responsive, JavaScript moderno y CSS frameworks para análisis y visualización de datos." data-en="Web platform with responsive interfaces, modern JavaScript and CSS frameworks for data analysis and visualization.">
                         Plataforma web con interfaces responsive, JavaScript moderno y CSS frameworks para análisis y visualización de datos.
                     </p>
-                    <a href="tstelling/index.html" class="card-link">
+                    <a href="tstelling/index.html" class="card-link" data-es="Ver Proyecto" data-en="View Project">
                         Ver Proyecto <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -551,11 +670,11 @@
                     <div class="card-icon">
                         <i class="fas fa-camera"></i>
                     </div>
-                    <h3 class="card-title">Portfolio Fotografía</h3>
-                    <p class="card-description">
+                    <h3 class="card-title" data-es="Portfolio Fotografía" data-en="Photography Portfolio">Portfolio Fotografía</h3>
+                    <p class="card-description" data-es="Sitio web de fotografía con galería interactiva, diseño minimalista y optimización para carga rápida de imágenes." data-en="Photography website with interactive gallery, minimalist design and optimization for fast image loading.">
                         Sitio web de fotografía con galería interactiva, diseño minimalista y optimización para carga rápida de imágenes.
                     </p>
-                    <a href="portfolio-fotografia/index.html" class="card-link">
+                    <a href="portfolio-fotografia/index.html" class="card-link" data-es="Ver Proyecto" data-en="View Project">
                         Ver Proyecto <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -565,10 +684,10 @@
                         <i class="fas fa-robot"></i>
                     </div>
                     <h3 class="card-title">ArcoBot</h3>
-                    <p class="card-description">
+                    <p class="card-description" data-es="Bot inteligente con OpenAI + Python (Flask) + Render, conectado a WhatsApp para automatización de ventas y atención al cliente." data-en="Intelligent bot with OpenAI + Python (Flask) + Render, connected to WhatsApp for sales automation and customer service.">
                         Bot inteligente con OpenAI + Python (Flask) + Render, conectado a WhatsApp para automatización de ventas y atención al cliente.
                     </p>
-                    <a href="arcobot/index.html" class="card-link">
+                    <a href="arcobot/index.html" class="card-link" data-es="Ver Proyecto" data-en="View Project">
                         Ver Proyecto <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -578,10 +697,10 @@
                         <i class="fas fa-leaf"></i>
                     </div>
                     <h3 class="card-title">Bioplastics Sensor System</h3>
-                    <p class="card-description">
+                    <p class="card-description" data-es="Sistema de monitoreo en Java para procesos biotecnológicos con adquisición de datos en tiempo real y algoritmos de análisis." data-en="Java monitoring system for biotechnological processes with real-time data acquisition and analysis algorithms.">
                         Sistema de monitoreo en Java para procesos biotecnológicos con adquisición de datos en tiempo real y algoritmos de análisis.
                     </p>
-                    <a href="bioplastics-sensor/index.html" class="card-link">
+                    <a href="bioplastics-sensor/index.html" class="card-link" data-es="Ver Proyecto" data-en="View Project">
                         Ver Proyecto <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -590,11 +709,11 @@
                     <div class="card-icon">
                         <i class="fas fa-building"></i>
                     </div>
-                    <h3 class="card-title">Proyectos NTT Data</h3>
-                    <p class="card-description">
+                    <h3 class="card-title" data-es="Proyectos NTT Data" data-en="NTT Data Projects">Proyectos NTT Data</h3>
+                    <p class="card-description" data-es="Proyectos corporativos incluyendo NTOL (Vodafone) con ELK Stack, sistemas de migración con Beats framework y procesamiento de datos." data-en="Corporate projects including NTOL (Vodafone) with ELK Stack, migration systems with Beats framework and data processing.">
                         Proyectos corporativos incluyendo NTOL (Vodafone) con ELK Stack, sistemas de migración con Beats framework y procesamiento de datos.
                     </p>
-                    <a href="ntt-data-projects/index.html" class="card-link">
+                    <a href="ntt-data-projects/index.html" class="card-link" data-es="Ver Detalles" data-en="View Details">
                         Ver Detalles <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -602,8 +721,8 @@
         </section>
 
         <section id="habilidades" class="section">
-            <h2 class="section-title animate-on-scroll">Habilidades Técnicas</h2>
-            <p class="section-subtitle animate-on-scroll">
+            <h2 class="section-title animate-on-scroll" data-es="Habilidades Técnicas" data-en="Technical Skills">Habilidades Técnicas</h2>
+            <p class="section-subtitle animate-on-scroll" data-es="Tecnologías y herramientas con las que trabajo" data-en="Technologies and tools I work with">
                 Tecnologías y herramientas con las que trabajo
             </p>
             
@@ -724,7 +843,7 @@
                     <div class="skill-icon">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
-                    <div class="skill-name">Responsive</div>
+                    <div class="skill-name" data-es="Responsive" data-en="Responsive">Responsive</div>
                 </div>
                 
                 <div class="skill-item animate-on-scroll">
@@ -815,8 +934,8 @@
     </div>
 
     <section id="contacto" class="section contact">
-        <h2 class="section-title animate-on-scroll">Contacto</h2>
-        <p class="section-subtitle animate-on-scroll">
+        <h2 class="section-title animate-on-scroll" data-es="Contacto" data-en="Contact">Contacto</h2>
+        <p class="section-subtitle animate-on-scroll" data-es="¿Tienes un proyecto en mente? ¡Hablemos!" data-en="Do you have a project in mind? Let's talk!">
             ¿Tienes un proyecto en mente? ¡Hablemos!
         </p>
         
@@ -844,7 +963,7 @@
     </section>
 
     <footer class="footer">
-        <p>&copy; 2024 Razvan Andrei Bade. Todos los derechos reservados.</p>
+        <p data-es="&copy; 2024 Razvan Andrei Bade. Todos los derechos reservados." data-en="&copy; 2024 Razvan Andrei Bade. All rights reserved.">&copy; 2024 Razvan Andrei Bade. Todos los derechos reservados.</p>
     </footer>
 
     <script>
@@ -889,6 +1008,69 @@
                 navbar.style.background = 'rgba(255, 255, 255, 0.95)';
             }
         });
+
+        // Script para cambiar el idioma con animación
+        function setLang(lang) {
+            localStorage.setItem('lang', lang);
+            document.documentElement.lang = lang;
+            
+            // Animar todos los elementos con traducción
+            const elements = document.querySelectorAll('[data-es], [data-en]');
+            elements.forEach(el => {
+                el.textContent = el.getAttribute('data-' + lang);
+            });
+            
+            // Actualizar estado visual del botón
+            updateButtonState(lang);
+        }
+        
+        function updateButtonState(lang) {
+            const button = document.getElementById('lang-toggle');
+            button.classList.remove('lang-es', 'lang-en');
+            button.classList.add('lang-' + lang);
+        }
+        
+        function toggleLang() {
+            const current = localStorage.getItem('lang') || 'es';
+            const newLang = current === 'es' ? 'en' : 'es';
+            const button = document.getElementById('lang-toggle');
+            const elements = document.querySelectorAll('[data-es], [data-en]');
+            
+            // Actualizar estado del botón y iniciar animación de volteo
+            updateButtonState(newLang);
+            button.classList.add('changing');
+            
+            // Fase 1: Fade out todos los textos
+            elements.forEach(el => {
+                el.classList.add('lang-changing');
+            });
+            
+            // Fase 2: Cambiar textos y fade in después de 250ms (mitad del volteo)
+            setTimeout(() => {
+                elements.forEach(el => {
+                    el.textContent = el.getAttribute('data-' + newLang);
+                    el.classList.remove('lang-changing');
+                    el.classList.add('lang-changing', 'lang-fade-in');
+                });
+                
+                localStorage.setItem('lang', newLang);
+                document.documentElement.lang = newLang;
+            }, 250);
+            
+            // Fase 3: Limpiar clases después de la animación
+            setTimeout(() => {
+                elements.forEach(el => {
+                    el.classList.remove('lang-changing', 'lang-fade-in');
+                });
+                button.classList.remove('changing');
+            }, 500);
+        }
+        
+        document.getElementById('lang-toggle').onclick = toggleLang;
+        
+        // Inicializar idioma
+        const initialLang = localStorage.getItem('lang') || 'es';
+        setLang(initialLang);
     </script>
 </body>
 </html> 

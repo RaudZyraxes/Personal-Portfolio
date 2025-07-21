@@ -47,6 +47,112 @@
             z-index: -1;
         }
         
+        /* Botón de idioma */
+        .lang-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.8);
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            background: none;
+            z-index: 1000;
+        }
+        
+        .lang-toggle:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            border-color: rgba(255,255,255,1);
+        }
+        
+        .lang-toggle:active {
+            transform: scale(0.95) rotate(-2deg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            transition: all 0.1s ease;
+        }
+        
+        .flag-half {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            top: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-toggle:hover .flag-half {
+            filter: brightness(1.1);
+        }
+        
+        /* Bandera de España SVG */
+        .flag-spain {
+            left: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="%23c60b1e"/><rect width="3" height="1" y="0.5" fill="%23ffc400"/></svg>') no-repeat;
+            background-size: cover;
+        }
+        
+        /* Bandera de USA SVG */
+        .flag-uk {
+            right: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1900 1000"><rect width="1900" height="1000" fill="%23b22234"/><rect width="1900" height="76.92" y="76.92" fill="white"/><rect width="1900" height="76.92" y="230.76" fill="white"/><rect width="1900" height="76.92" y="384.61" fill="white"/><rect width="1900" height="76.92" y="538.46" fill="white"/><rect width="1900" height="76.92" y="692.31" fill="white"/><rect width="1900" height="76.92" y="846.15" fill="white"/><rect width="760" height="538.46" fill="%233c3b6e"/><g fill="white"><circle cx="63" cy="63" r="6"/><circle cx="189" cy="63" r="6"/><circle cx="315" cy="63" r="6"/><circle cx="441" cy="63" r="6"/><circle cx="567" cy="63" r="6"/><circle cx="693" cy="63" r="6"/><circle cx="126" cy="126" r="6"/><circle cx="252" cy="126" r="6"/><circle cx="378" cy="126" r="6"/><circle cx="504" cy="126" r="6"/><circle cx="630" cy="126" r="6"/><circle cx="63" cy="189" r="6"/><circle cx="189" cy="189" r="6"/><circle cx="315" cy="189" r="6"/><circle cx="441" cy="189" r="6"/><circle cx="567" cy="189" r="6"/><circle cx="693" cy="189" r="6"/><circle cx="126" cy="252" r="6"/><circle cx="252" cy="252" r="6"/><circle cx="378" cy="252" r="6"/><circle cx="504" cy="252" r="6"/><circle cx="630" cy="252" r="6"/><circle cx="63" cy="315" r="6"/><circle cx="189" cy="315" r="6"/><circle cx="315" cy="315" r="6"/><circle cx="441" cy="315" r="6"/><circle cx="567" cy="315" r="6"/><circle cx="693" cy="315" r="6"/><circle cx="126" cy="378" r="6"/><circle cx="252" cy="378" r="6"/><circle cx="378" cy="378" r="6"/><circle cx="504" cy="378" r="6"/><circle cx="630" cy="378" r="6"/><circle cx="63" cy="441" r="6"/><circle cx="189" cy="441" r="6"/><circle cx="315" cy="441" r="6"/><circle cx="441" cy="441" r="6"/><circle cx="567" cy="441" r="6"/><circle cx="693" cy="441" r="6"/><circle cx="126" cy="504" r="6"/><circle cx="252" cy="504" r="6"/><circle cx="378" cy="504" r="6"/><circle cx="504" cy="504" r="6"/><circle cx="630" cy="504" r="6"/></g></svg>') no-repeat;
+            background-size: cover;
+        }
+        
+        /* Animaciones de cambio de idioma */
+        .lang-changing {
+            animation: langFadeOut 0.3s ease-out forwards;
+        }
+        
+        .lang-changing.lang-fade-in {
+            animation: langFadeIn 0.3s ease-in forwards;
+        }
+        
+        @keyframes langFadeOut {
+            0% { opacity: 1; transform: translateY(0px); }
+            100% { opacity: 0; transform: translateY(-10px); }
+        }
+        
+        @keyframes langFadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0px); }
+        }
+        
+        /* Estados del botón según el idioma */
+        .lang-toggle.lang-en {
+            transform: rotateY(180deg);
+        }
+        
+        .lang-toggle.lang-es {
+            transform: rotateY(0deg);
+        }
+        
+        .lang-toggle {
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        /* Animación de volteo durante el cambio */
+        .lang-toggle.changing.lang-en {
+            animation: flipToEnglish 0.5s ease-in-out;
+        }
+        
+        .lang-toggle.changing.lang-es {
+            animation: flipToSpanish 0.5s ease-in-out;
+        }
+        
+        @keyframes flipToEnglish {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(180deg); }
+        }
+        
+        @keyframes flipToSpanish {
+            0% { transform: rotateY(180deg); }
+            100% { transform: rotateY(0deg); }
+        }
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -420,11 +526,16 @@
     </style>
 </head>
 <body>
+    <button class="lang-toggle" id="lang-toggle" aria-label="Cambiar idioma">
+        <div class="flag-half flag-spain"></div>
+        <div class="flag-half flag-uk"></div>
+    </button>
+    
     <div class="container">
         <div class="back-nav">
             <a href="../portfolio.html#inicio">
                 <i class="fas fa-arrow-left"></i>
-                Volver al Portfolio
+                <span data-es="Volver al Portfolio" data-en="Back to Portfolio">Volver al Portfolio</span>
             </a>
         </div>
         
@@ -433,111 +544,156 @@
                 <i class="fas fa-building"></i>
             </div>
             <h1 class="project-title">Proyectos NTT Data</h1>
-            <p class="project-subtitle">Experiencia en Proyectos Corporativos de Gran Escala</p>
-            <span class="project-status">Experiencia Profesional</span>
+            <p class="project-subtitle" data-es="Experiencia Profesional en Consultoría Tecnológica" data-en="Professional Experience in Technology Consulting">Experiencia Profesional en Consultoría Tecnológica</p>
+            <span class="project-status" data-es="Experiencia Corporativa" data-en="Corporate Experience">Experiencia Corporativa</span>
         </div>
         
         <div class="content-grid">
             <div class="main-content">
                 <div class="description-section">
-                    <h3>Experiencia en NTT Data</h3>
-                    <p>
-                        Durante mi experiencia en NTT Data, participé en proyectos corporativos de gran escala, 
-                        trabajando con tecnologías avanzadas de análisis de datos y sistemas de monitoreo para 
-                        clientes enterprise como Vodafone.
+                    <h3 data-es="Descripción de la Experiencia" data-en="Experience Description">Descripción de la Experiencia</h3>
+                    <p data-es="Durante mi tiempo en NTT Data, participé en múltiples proyectos de consultoría tecnológica para grandes corporaciones, enfocándome en soluciones de software empresarial y transformación digital." data-en="During my time at NTT Data, I participated in multiple technology consulting projects for large corporations, focusing on enterprise software solutions and digital transformation.">
+                        Durante mi tiempo en NTT Data, participé en múltiples proyectos de consultoría tecnológica 
+                        para grandes corporaciones, enfocándome en soluciones de software empresarial y transformación digital.
                     </p>
-                    <p>
-                        Mi rol incluyó el desarrollo e implementación de soluciones de big data, migración de 
-                        sistemas críticos y creación de pipelines de datos robustos utilizando el stack ELK 
-                        y herramientas de procesamiento en tiempo real.
+                    <p data-es="Trabajé en equipos multidisciplinarios desarrollando aplicaciones web escalables, implementando metodologías ágiles y colaborando en la arquitectura de sistemas complejos para mejorar la eficiencia operativa de los clientes." data-en="I worked in multidisciplinary teams developing scalable web applications, implementing agile methodologies and collaborating on complex system architecture to improve clients' operational efficiency.">
+                        Trabajé en equipos multidisciplinarios desarrollando aplicaciones web escalables, implementando 
+                        metodologías ágiles y colaborando en la arquitectura de sistemas complejos para mejorar la 
+                        eficiencia operativa de los clientes.
                     </p>
                 </div>
                 
-                <div class="project-grid">
-                    <div class="sub-project">
-                        <h4>NTOL Project (Vodafone)</h4>
-                        <p>
-                            Implementación de gestión de datos a gran escala usando ELK Stack con tres pipelines, 
-                            enriquecimiento de datos en formato JSON y visualización de resultados a través de 
-                            Kibana para validación de datos.
-                        </p>
-                    </div>
-                    
-                    <div class="sub-project">
-                        <h4>MigracionOn15_On19</h4>
-                        <p>
-                            Lideré pipelines de migración de proyectos desde entorno de pruebas a pre-producción, 
-                            utilizando Beats framework y herramientas Filebeat para procesamiento y visualización 
-                            de datos de analistas.
-                        </p>
-                    </div>
-                    
-                    <div class="sub-project">
-                        <h4>Batch_Validate</h4>
-                        <p>
-                            Desarrollé sistema dual de ingesta de datos Kafka para enriquecimiento y transformación 
-                            JSON, creando scripts de monitoreo Python que actúan como traffic lights para 
-                            seguimiento detallado de ingesta y análisis de comportamiento de datos.
-                        </p>
+                <div class="project-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-building"></i>
+                        <p data-es="Entorno Corporativo" data-en="Corporate Environment">Entorno Corporativo</p>
+                        <small data-es="Consultoría tecnológica" data-en="Technology consulting">Consultoría tecnológica</small>
                     </div>
                 </div>
                 
                 <div class="description-section">
-                    <h3>Logros y Resultados</h3>
+                    <h3 data-es="Proyectos Destacados" data-en="Featured Projects">Proyectos Destacados</h3>
                     <ul class="feature-list">
-                        <li><i class="fas fa-check"></i> Optimización del 40% en tiempos de procesamiento de datos</li>
-                        <li><i class="fas fa-check"></i> Implementación exitosa de 3 pipelines críticos</li>
-                        <li><i class="fas fa-check"></i> Migración sin downtime de sistemas de producción</li>
-                        <li><i class="fas fa-check"></i> Automatización de procesos de validación de datos</li>
-                        <li><i class="fas fa-check"></i> Mejora en la precisión de análisis de datos del 95%</li>
+                        <li><i class="fas fa-check"></i> <span data-es="Desarrollo de aplicaciones web empresariales" data-en="Enterprise web application development">Desarrollo de aplicaciones web empresariales</span></li>
+                        <li><i class="fas fa-check"></i> <span data-es="Implementación de metodologías ágiles (Scrum/Kanban)" data-en="Implementation of agile methodologies (Scrum/Kanban)">Implementación de metodologías ágiles (Scrum/Kanban)</span></li>
+                        <li><i class="fas fa-check"></i> <span data-es="Arquitectura de sistemas escalables" data-en="Scalable system architecture">Arquitectura de sistemas escalables</span></li>
+                        <li><i class="fas fa-check"></i> <span data-es="Integración de APIs y microservicios" data-en="API and microservices integration">Integración de APIs y microservicios</span></li>
+                        <li><i class="fas fa-check"></i> <span data-es="Optimización de bases de datos" data-en="Database optimization">Optimización de bases de datos</span></li>
+                        <li><i class="fas fa-check"></i> <span data-es="Consultoría en transformación digital" data-en="Digital transformation consulting">Consultoría en transformación digital</span></li>
+                        <li><i class="fas fa-check"></i> <span data-es="Mentoring de equipos junior" data-en="Junior team mentoring">Mentoring de equipos junior</span></li>
                     </ul>
                 </div>
                 
-                <a href="../cv/" class="cta-button">
-                    <i class="fas fa-file-alt"></i>
-                    Ver CV Completo
-                </a>
+                <div class="cta-button" style="background: #ccc; cursor: not-allowed; opacity: 0.6;">
+                    <i class="fas fa-link"></i>
+                    <span data-es="Información confidencial" data-en="Confidential information">Información confidencial</span>
+                </div>
             </div>
             
             <div class="sidebar">
                 <div class="info-card">
-                    <h3><i class="fas fa-code"></i> Tecnologías Utilizadas</h3>
+                    <h3><i class="fas fa-code"></i> <span data-es="Tecnologías Utilizadas" data-en="Technologies Used">Tecnologías Utilizadas</span></h3>
                     <div class="tech-list">
-                        <span class="tech-tag">ELK Stack</span>
-                        <span class="tech-tag">Elasticsearch</span>
-                        <span class="tech-tag">Logstash</span>
-                        <span class="tech-tag">Kibana</span>
-                        <span class="tech-tag">Apache Kafka</span>
-                        <span class="tech-tag">Beats Framework</span>
-                        <span class="tech-tag">Filebeat</span>
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">JSON</span>
+                        <span class="tech-tag">Java</span>
+                        <span class="tech-tag">Spring Boot</span>
+                        <span class="tech-tag">Angular</span>
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">AWS</span>
+                        <span class="tech-tag">Jenkins</span>
                     </div>
                 </div>
                 
                 <div class="info-card">
-                    <h3><i class="fas fa-info-circle"></i> Detalles de la Experiencia</h3>
+                    <h3><i class="fas fa-info-circle"></i> <span data-es="Información Corporativa" data-en="Corporate Information">Información Corporativa</span></h3>
                     <ul class="feature-list">
-                        <li><i class="fas fa-building"></i> Empresa: NTT Data</li>
-                        <li><i class="fas fa-calendar"></i> Duración: Varios proyectos</li>
-                        <li><i class="fas fa-users"></i> Cliente: Vodafone (NTOL)</li>
-                        <li><i class="fas fa-server"></i> Entorno: Enterprise</li>
-                        <li><i class="fas fa-chart-line"></i> Tipo: Big Data & Analytics</li>
+                        <li><i class="fas fa-calendar"></i> <span data-es="Duración: 1 año" data-en="Duration: 1 year">Duración: 1 año</span></li>
+                        <li><i class="fas fa-user-tie"></i> <span data-es="Rol: Consultor Tecnológico" data-en="Role: Technology Consultant">Rol: Consultor Tecnológico</span></li>
+                        <li><i class="fas fa-industry"></i> <span data-es="Sector: Consultoría IT" data-en="Sector: IT Consulting">Sector: Consultoría IT</span></li>
+                        <li><i class="fas fa-users"></i> <span data-es="Equipos: Multidisciplinarios" data-en="Teams: Multidisciplinary">Equipos: Multidisciplinarios</span></li>
+                        <li><i class="fas fa-globe"></i> <span data-es="Clientes: Corporaciones" data-en="Clients: Corporations">Clientes: Corporaciones</span></li>
                     </ul>
                 </div>
                 
                 <div class="info-card">
-                    <h3><i class="fas fa-tasks"></i> Responsabilidades</h3>
+                    <h3><i class="fas fa-chart-line"></i> <span data-es="Logros y Aprendizajes" data-en="Achievements and Learning">Logros y Aprendizajes</span></h3>
                     <ul class="feature-list">
-                        <li><i class="fas fa-cogs"></i> Diseño de pipelines de datos</li>
-                        <li><i class="fas fa-database"></i> Migración de sistemas críticos</li>
-                        <li><i class="fas fa-search"></i> Implementación ELK Stack</li>
-                        <li><i class="fas fa-code"></i> Scripts de monitoreo Python</li>
-                        <li><i class="fas fa-chart-bar"></i> Visualización con Kibana</li>
+                        <li><i class="fas fa-trophy"></i> <span data-es="Proyectos entregados exitosamente" data-en="Successfully delivered projects">Proyectos entregados exitosamente</span></li>
+                        <li><i class="fas fa-users-cog"></i> <span data-es="Experiencia en trabajo en equipo" data-en="Teamwork experience">Experiencia en trabajo en equipo</span></li>
+                        <li><i class="fas fa-rocket"></i> <span data-es="Metodologías ágiles implementadas" data-en="Agile methodologies implemented">Metodologías ágiles implementadas</span></li>
+                        <li><i class="fas fa-brain"></i> <span data-es="Habilidades de consultoría desarrolladas" data-en="Consulting skills developed">Habilidades de consultoría desarrolladas</span></li>
+                        <li><i class="fas fa-handshake"></i> <span data-es="Relaciones con clientes corporativos" data-en="Corporate client relationships">Relaciones con clientes corporativos</span></li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
+    
+    <script>
+        // Script para cambiar el idioma con animación
+        function setLang(lang) {
+            localStorage.setItem('lang', lang);
+            document.documentElement.lang = lang;
+            
+            // Animar todos los elementos con traducción
+            const elements = document.querySelectorAll('[data-es], [data-en]');
+            elements.forEach(el => {
+                el.textContent = el.getAttribute('data-' + lang);
+            });
+            
+            // Actualizar estado visual del botón
+            updateButtonState(lang);
+        }
+        
+        function updateButtonState(lang) {
+            const button = document.getElementById('lang-toggle');
+            button.classList.remove('lang-es', 'lang-en');
+            button.classList.add('lang-' + lang);
+        }
+        
+        function toggleLang() {
+            const current = localStorage.getItem('lang') || 'es';
+            const newLang = current === 'es' ? 'en' : 'es';
+            const button = document.getElementById('lang-toggle');
+            const elements = document.querySelectorAll('[data-es], [data-en]');
+            
+            // Actualizar estado del botón y iniciar animación de volteo
+            updateButtonState(newLang);
+            button.classList.add('changing');
+            
+            // Fase 1: Fade out todos los textos
+            elements.forEach(el => {
+                el.classList.add('lang-changing');
+            });
+            
+            // Fase 2: Cambiar textos y fade in después de 250ms (mitad del volteo)
+            setTimeout(() => {
+                elements.forEach(el => {
+                    el.textContent = el.getAttribute('data-' + newLang);
+                    el.classList.remove('lang-changing');
+                    el.classList.add('lang-changing', 'lang-fade-in');
+                });
+                
+                localStorage.setItem('lang', newLang);
+                document.documentElement.lang = newLang;
+            }, 250);
+            
+            // Fase 3: Limpiar clases después de la animación
+            setTimeout(() => {
+                elements.forEach(el => {
+                    el.classList.remove('lang-changing', 'lang-fade-in');
+                });
+                button.classList.remove('changing');
+            }, 500);
+        }
+        
+        document.getElementById('lang-toggle').onclick = toggleLang;
+        
+        // Inicializar idioma
+        const initialLang = localStorage.getItem('lang') || 'es';
+        setLang(initialLang);
+    </script>
 </body>
 </html> 

@@ -47,6 +47,112 @@
             z-index: -1;
         }
         
+        /* Botón de idioma */
+        .lang-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.8);
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            background: none;
+            z-index: 1000;
+        }
+        
+        .lang-toggle:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            border-color: rgba(255,255,255,1);
+        }
+        
+        .lang-toggle:active {
+            transform: scale(0.95) rotate(-2deg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            transition: all 0.1s ease;
+        }
+        
+        .flag-half {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            top: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-toggle:hover .flag-half {
+            filter: brightness(1.1);
+        }
+        
+        /* Bandera de España SVG */
+        .flag-spain {
+            left: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="%23c60b1e"/><rect width="3" height="1" y="0.5" fill="%23ffc400"/></svg>') no-repeat;
+            background-size: cover;
+        }
+        
+        /* Bandera de USA SVG */
+        .flag-uk {
+            right: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1900 1000"><rect width="1900" height="1000" fill="%23b22234"/><rect width="1900" height="76.92" y="76.92" fill="white"/><rect width="1900" height="76.92" y="230.76" fill="white"/><rect width="1900" height="76.92" y="384.61" fill="white"/><rect width="1900" height="76.92" y="538.46" fill="white"/><rect width="1900" height="76.92" y="692.31" fill="white"/><rect width="1900" height="76.92" y="846.15" fill="white"/><rect width="760" height="538.46" fill="%233c3b6e"/><g fill="white"><circle cx="63" cy="63" r="6"/><circle cx="189" cy="63" r="6"/><circle cx="315" cy="63" r="6"/><circle cx="441" cy="63" r="6"/><circle cx="567" cy="63" r="6"/><circle cx="693" cy="63" r="6"/><circle cx="126" cy="126" r="6"/><circle cx="252" cy="126" r="6"/><circle cx="378" cy="126" r="6"/><circle cx="504" cy="126" r="6"/><circle cx="630" cy="126" r="6"/><circle cx="63" cy="189" r="6"/><circle cx="189" cy="189" r="6"/><circle cx="315" cy="189" r="6"/><circle cx="441" cy="189" r="6"/><circle cx="567" cy="189" r="6"/><circle cx="693" cy="189" r="6"/><circle cx="126" cy="252" r="6"/><circle cx="252" cy="252" r="6"/><circle cx="378" cy="252" r="6"/><circle cx="504" cy="252" r="6"/><circle cx="630" cy="252" r="6"/><circle cx="63" cy="315" r="6"/><circle cx="189" cy="315" r="6"/><circle cx="315" cy="315" r="6"/><circle cx="441" cy="315" r="6"/><circle cx="567" cy="315" r="6"/><circle cx="693" cy="315" r="6"/><circle cx="126" cy="378" r="6"/><circle cx="252" cy="378" r="6"/><circle cx="378" cy="378" r="6"/><circle cx="504" cy="378" r="6"/><circle cx="630" cy="378" r="6"/><circle cx="63" cy="441" r="6"/><circle cx="189" cy="441" r="6"/><circle cx="315" cy="441" r="6"/><circle cx="441" cy="441" r="6"/><circle cx="567" cy="441" r="6"/><circle cx="693" cy="441" r="6"/><circle cx="126" cy="504" r="6"/><circle cx="252" cy="504" r="6"/><circle cx="378" cy="504" r="6"/><circle cx="504" cy="504" r="6"/><circle cx="630" cy="504" r="6"/></g></svg>') no-repeat;
+            background-size: cover;
+        }
+        
+        /* Animaciones de cambio de idioma */
+        .lang-changing {
+            animation: langFadeOut 0.3s ease-out forwards;
+        }
+        
+        .lang-changing.lang-fade-in {
+            animation: langFadeIn 0.3s ease-in forwards;
+        }
+        
+        @keyframes langFadeOut {
+            0% { opacity: 1; transform: translateY(0px); }
+            100% { opacity: 0; transform: translateY(-10px); }
+        }
+        
+        @keyframes langFadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0px); }
+        }
+        
+        /* Estados del botón según el idioma */
+        .lang-toggle.lang-en {
+            transform: rotateY(180deg);
+        }
+        
+        .lang-toggle.lang-es {
+            transform: rotateY(0deg);
+        }
+        
+        .lang-toggle {
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        /* Animación de volteo durante el cambio */
+        .lang-toggle.changing.lang-en {
+            animation: flipToEnglish 0.5s ease-in-out;
+        }
+        
+        .lang-toggle.changing.lang-es {
+            animation: flipToSpanish 0.5s ease-in-out;
+        }
+        
+        @keyframes flipToEnglish {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(180deg); }
+        }
+        
+        @keyframes flipToSpanish {
+            0% { transform: rotateY(180deg); }
+            100% { transform: rotateY(0deg); }
+        }
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -449,11 +555,16 @@
     </style>
 </head>
 <body>
+    <button class="lang-toggle" id="lang-toggle" aria-label="Cambiar idioma">
+        <div class="flag-half flag-spain"></div>
+        <div class="flag-half flag-uk"></div>
+    </button>
+    
     <div class="container">
         <div class="back-nav">
             <a href="../portfolio.html#inicio">
                 <i class="fas fa-arrow-left"></i>
-                Volver al Portfolio
+                <span data-es="Volver al Portfolio" data-en="Back to Portfolio">Volver al Portfolio</span>
             </a>
         </div>
         
@@ -462,20 +573,20 @@
                 <i class="fas fa-chart-line"></i>
             </div>
             <h1 class="project-title">TSTelling</h1>
-            <p class="project-subtitle">Plataforma Web para Análisis y Visualización de Datos</p>
-            <span class="project-status">Proyecto Completado</span>
+            <p class="project-subtitle" data-es="Plataforma Web para Análisis y Visualización de Datos" data-en="Web Platform for Data Analysis and Visualization">Plataforma Web para Análisis y Visualización de Datos</p>
+            <span class="project-status" data-es="Proyecto Completado" data-en="Completed Project">Proyecto Completado</span>
         </div>
         
         <div class="content-grid">
             <div class="main-content">
                 <div class="description-section">
-                    <h3>Descripción del Proyecto</h3>
-                    <p>
+                    <h3 data-es="Descripción del Proyecto" data-en="Project Description">Descripción del Proyecto</h3>
+                    <p data-es="TSTelling es una plataforma web moderna desarrollada con interfaces responsive y JavaScript avanzado para análisis y visualización de datos. Utiliza CSS frameworks modernos para proporcionar una experiencia de usuario fluida y profesional." data-en="TSTelling is a modern web platform developed with responsive interfaces and advanced JavaScript for data analysis and visualization. It uses modern CSS frameworks to provide a smooth and professional user experience.">
                         TSTelling es una plataforma web moderna desarrollada con interfaces responsive y JavaScript 
                         avanzado para análisis y visualización de datos. Utiliza CSS frameworks modernos para 
                         proporcionar una experiencia de usuario fluida y profesional.
                     </p>
-                    <p>
+                    <p data-es="La plataforma permite a los usuarios procesar, analizar y visualizar grandes conjuntos de datos de manera interactiva, con dashboards personalizables y reportes en tiempo real optimizados para la toma de decisiones empresariales." data-en="The platform allows users to process, analyze and visualize large datasets interactively, with customizable dashboards and real-time reports optimized for business decision making.">
                         La plataforma permite a los usuarios procesar, analizar y visualizar grandes conjuntos de 
                         datos de manera interactiva, con dashboards personalizables y reportes en tiempo real 
                         optimizados para la toma de decisiones empresariales.
@@ -485,33 +596,33 @@
                 <div class="project-image">
                     <div class="image-placeholder">
                         <i class="fas fa-chart-line"></i>
-                        <p>Vista previa del proyecto</p>
-                        <small>Dashboard interactivo</small>
+                        <p data-es="Vista previa del proyecto" data-en="Project preview">Vista previa del proyecto</p>
+                        <small data-es="Dashboard interactivo" data-en="Interactive dashboard">Dashboard interactivo</small>
                     </div>
                 </div>
                 
                 <div class="description-section">
-                    <h3>Características Principales</h3>
+                    <h3 data-es="Características Principales" data-en="Main Features">Características Principales</h3>
                     <ul class="feature-list">
-                        <li><i class="fas fa-check"></i> Interfaces responsive con JavaScript moderno</li>
-                        <li><i class="fas fa-check"></i> CSS frameworks para diseño consistente</li>
-                        <li><i class="fas fa-check"></i> Dashboards interactivos y personalizables</li>
-                        <li><i class="fas fa-check"></i> Visualización de datos en tiempo real</li>
-                        <li><i class="fas fa-check"></i> Reportes automatizados y exportables</li>
-                        <li><i class="fas fa-check"></i> Filtros avanzados y búsqueda inteligente</li>
-                        <li><i class="fas fa-check"></i> API integrada para conectividad externa</li>
+                        <li><i class="fas fa-check"></i> <span data-es="Interfaces responsive con JavaScript moderno" data-en="Responsive interfaces with modern JavaScript">Interfaces responsive con JavaScript moderno</span></li>
+                        <li><i class="fas fa-check"></i> <span data-es="CSS frameworks para diseño consistente" data-en="CSS frameworks for consistent design">CSS frameworks para diseño consistente</span></li>
+                        <li><i class="fas fa-check"></i> <span data-es="Dashboards interactivos y personalizables" data-en="Interactive and customizable dashboards">Dashboards interactivos y personalizables</span></li>
+                        <li><i class="fas fa-check"></i> <span data-es="Visualización de datos en tiempo real" data-en="Real-time data visualization">Visualización de datos en tiempo real</span></li>
+                        <li><i class="fas fa-check"></i> <span data-es="Reportes automatizados y exportables" data-en="Automated and exportable reports">Reportes automatizados y exportables</span></li>
+                        <li><i class="fas fa-check"></i> <span data-es="Filtros avanzados y búsqueda inteligente" data-en="Advanced filters and smart search">Filtros avanzados y búsqueda inteligente</span></li>
+                        <li><i class="fas fa-check"></i> <span data-es="API integrada para conectividad externa" data-en="Integrated API for external connectivity">API integrada para conectividad externa</span></li>
                     </ul>
                 </div>
                 
                 <div class="cta-button" style="background: #ccc; cursor: not-allowed; opacity: 0.6;">
                     <i class="fas fa-link"></i>
-                    Enlace disponible próximamente
+                    <span data-es="Enlace disponible próximamente" data-en="Link available soon">Enlace disponible próximamente</span>
                 </div>
             </div>
             
             <div class="sidebar">
                 <div class="info-card">
-                    <h3><i class="fas fa-code"></i> Tecnologías Utilizadas</h3>
+                    <h3><i class="fas fa-code"></i> <span data-es="Tecnologías Utilizadas" data-en="Technologies Used">Tecnologías Utilizadas</span></h3>
                     <div class="tech-list">
                         <span class="tech-tag">JavaScript</span>
                         <span class="tech-tag">HTML5</span>
@@ -526,28 +637,93 @@
                 </div>
                 
                 <div class="info-card">
-                    <h3><i class="fas fa-info-circle"></i> Detalles del Proyecto</h3>
+                    <h3><i class="fas fa-info-circle"></i> <span data-es="Detalles del Proyecto" data-en="Project Details">Detalles del Proyecto</span></h3>
                     <ul class="feature-list">
-                        <li><i class="fas fa-calendar"></i> Duración: 3 meses</li>
-                        <li><i class="fas fa-users"></i> Equipo: 1 desarrollador</li>
-                        <li><i class="fas fa-globe"></i> Tipo: Plataforma web</li>
-                        <li><i class="fas fa-chart-bar"></i> Enfoque: Data Analytics</li>
-                        <li><i class="fas fa-mobile-alt"></i> Responsive: Totalmente</li>
+                        <li><i class="fas fa-calendar"></i> <span data-es="Duración: 3 meses" data-en="Duration: 3 months">Duración: 3 meses</span></li>
+                        <li><i class="fas fa-users"></i> <span data-es="Equipo: 1 desarrollador" data-en="Team: 1 developer">Equipo: 1 desarrollador</span></li>
+                        <li><i class="fas fa-globe"></i> <span data-es="Tipo: Plataforma web" data-en="Type: Web platform">Tipo: Plataforma web</span></li>
+                        <li><i class="fas fa-chart-bar"></i> <span data-es="Enfoque: Data Analytics" data-en="Focus: Data Analytics">Enfoque: Data Analytics</span></li>
+                        <li><i class="fas fa-mobile-alt"></i> <span data-es="Responsive: Totalmente" data-en="Responsive: Fully">Responsive: Totalmente</span></li>
                     </ul>
                 </div>
                 
                 <div class="info-card">
-                    <h3><i class="fas fa-tools"></i> Funcionalidades</h3>
+                    <h3><i class="fas fa-tools"></i> <span data-es="Funcionalidades" data-en="Features">Funcionalidades</span></h3>
                     <ul class="feature-list">
-                        <li><i class="fas fa-chart-pie"></i> Gráficos interactivos múltiples</li>
-                        <li><i class="fas fa-filter"></i> Filtros dinámicos avanzados</li>
-                        <li><i class="fas fa-download"></i> Exportación de reportes</li>
-                        <li><i class="fas fa-sync"></i> Actualización en tiempo real</li>
-                        <li><i class="fas fa-users-cog"></i> Gestión de usuarios y permisos</li>
+                        <li><i class="fas fa-chart-pie"></i> <span data-es="Gráficos interactivos múltiples" data-en="Multiple interactive charts">Gráficos interactivos múltiples</span></li>
+                        <li><i class="fas fa-filter"></i> <span data-es="Filtros dinámicos avanzados" data-en="Advanced dynamic filters">Filtros dinámicos avanzados</span></li>
+                        <li><i class="fas fa-download"></i> <span data-es="Exportación de reportes" data-en="Report export">Exportación de reportes</span></li>
+                        <li><i class="fas fa-sync"></i> <span data-es="Actualización en tiempo real" data-en="Real-time updates">Actualización en tiempo real</span></li>
+                        <li><i class="fas fa-users-cog"></i> <span data-es="Gestión de usuarios y permisos" data-en="User and permission management">Gestión de usuarios y permisos</span></li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
+    
+    <script>
+        // Script para cambiar el idioma con animación
+        function setLang(lang) {
+            localStorage.setItem('lang', lang);
+            document.documentElement.lang = lang;
+            
+            // Animar todos los elementos con traducción
+            const elements = document.querySelectorAll('[data-es], [data-en]');
+            elements.forEach(el => {
+                el.textContent = el.getAttribute('data-' + lang);
+            });
+            
+            // Actualizar estado visual del botón
+            updateButtonState(lang);
+        }
+        
+        function updateButtonState(lang) {
+            const button = document.getElementById('lang-toggle');
+            button.classList.remove('lang-es', 'lang-en');
+            button.classList.add('lang-' + lang);
+        }
+        
+        function toggleLang() {
+            const current = localStorage.getItem('lang') || 'es';
+            const newLang = current === 'es' ? 'en' : 'es';
+            const button = document.getElementById('lang-toggle');
+            const elements = document.querySelectorAll('[data-es], [data-en]');
+            
+            // Actualizar estado del botón y iniciar animación de volteo
+            updateButtonState(newLang);
+            button.classList.add('changing');
+            
+            // Fase 1: Fade out todos los textos
+            elements.forEach(el => {
+                el.classList.add('lang-changing');
+            });
+            
+            // Fase 2: Cambiar textos y fade in después de 250ms (mitad del volteo)
+            setTimeout(() => {
+                elements.forEach(el => {
+                    el.textContent = el.getAttribute('data-' + newLang);
+                    el.classList.remove('lang-changing');
+                    el.classList.add('lang-changing', 'lang-fade-in');
+                });
+                
+                localStorage.setItem('lang', newLang);
+                document.documentElement.lang = newLang;
+            }, 250);
+            
+            // Fase 3: Limpiar clases después de la animación
+            setTimeout(() => {
+                elements.forEach(el => {
+                    el.classList.remove('lang-changing', 'lang-fade-in');
+                });
+                button.classList.remove('changing');
+            }, 500);
+        }
+        
+        document.getElementById('lang-toggle').onclick = toggleLang;
+        
+        // Inicializar idioma
+        const initialLang = localStorage.getItem('lang') || 'es';
+        setLang(initialLang);
+    </script>
 </body>
 </html> 
