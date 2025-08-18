@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="260" viewBox="0 0 1200 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Green bottom shade background">
+  <title>Green Bottom Shade Background</title>
+
+  <defs>
+    <!-- Sombreado verde inferior muy sutil -->
+    <linearGradient id="green-bottom-shade" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#22ff88" stop-opacity="0.15"/>
+      <stop offset="40%" stop-color="#22ff88" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fondo negro -->
+  <rect width="1200" height="260" fill="#000000" rx="14"/>
+
+  <!-- Sombra verde inferior -->
+  <rect width="1200" height="80" y="180" fill="url(#green-bottom-shade)" rx="14"/>
+</svg>
