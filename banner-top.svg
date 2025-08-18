@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="260" viewBox="0 0 1200 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Andrei Bade — neon glow banner">
+  <title>Andrei Bade — Neon Glow Banner</title>
+
+  <defs>
+    <!-- Glow -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.6" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Gradiente animado para el texto -->
+    <linearGradient id="text-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22ff88"/>
+      <stop offset="50%" stop-color="#00ffaa"/>
+      <stop offset="100%" stop-color="#22ff88"/>
+      <animateTransform attributeName="gradientTransform" type="translate"
+                        from="-1 0" to="1 0" dur="4s" repeatCount="indefinite"/>
+    </linearGradient>
+
+    <!-- Sombreado verde mucho más sutil -->
+    <linearGradient id="green-shade" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#22ff88" stop-opacity="0.15"/>
+      <stop offset="40%" stop-color="#22ff88" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fondo negro -->
+  <rect width="1200" height="260" fill="#000000" rx="14"/>
+
+  <!-- Sombra verde superior -->
+  <rect width="1200" height="70" fill="url(#green-shade)" rx="14"/>
+
+  <!-- Texto -->
+  <g filter="url(#glow)">
+    <!-- Nombre -->
+    <text x="50%" y="140" text-anchor="middle"
+          font-family="Inter, Segoe UI, Arial, sans-serif"
+          font-size="48" font-weight="800"
+          fill="url(#text-gradient)" opacity="0">
+      <animate attributeName="opacity" values="0;1;0.7;1" dur="2.5s" fill="freeze"/>
+      ANDREI BADE
+    </text>
+
+    <!-- Subtítulo -->
+    <text x="50%" y="170" text-anchor="middle"
+          font-family="Inter, Segoe UI, Arial, sans-serif"
+          font-size="18" fill="#cfe" opacity="0.85">
+      <animate attributeName="opacity" values="0.85;1;0.85" dur="3s" repeatCount="indefinite"/>
+      Full Stack &amp; Data-Oriented Developer
+    </text>
+  </g>
+</svg>
